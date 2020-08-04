@@ -76,21 +76,33 @@ export class Dropdown{
      * @memberof Dropdown
      */
     open(properties = {open: null}){
-        let selected = null,
-            dropdown = this;
+        let selected = [],
+        dropdown = this;
         for(const html of document.querySelectorAll('.dropdown-js')){
             if(properties.open == html.dataset.name){
                 selected = html;
             }else{
                 for(const child of html.children[1].children){
-                    if(properties.open == child.dataset.name){
-                        selected = html;
+                    if(child.classList.contains('dropdown-js')){
+                        for(const subchild of child.children[1].children){
+                            if(properties.open == subchild.dataset.name){
+                                selected.push(html);
+                            }
+                        }
+                    }else{
+                        if(properties.open == child.dataset.name){
+                            selected.push(html);
+                        }
                     }
                 }
             }
         }
-        if(this.html == selected){
-            Dropdown.switch(dropdown, this.fixed);
+        if(selected.length){
+            for(const html of selected){
+                if(this.html == html){
+                    Dropdown.switch(dropdown, this.fixed);
+                }
+            }
         }
     }
 
