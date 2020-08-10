@@ -1,18 +1,28 @@
-.dropdown-js{
-    --color-one: #fff; /* * Title */
-    --color-one-alternative: #ddd; /* * Title hover */
-    --color-two: #fff; /* * Buttons */
-    --color-two-alternative: #ddd; /* * Buttons hover */
-    --color-three: #222; /* * Background */
-    --color-three-alternative: #000; /* * Background hover */
+
+
+.dropdown{
+    --color-one: #222; /* * Titles */
+    --color-two: #222; /* * Buttons */
+    --color-two-alternative: #000; /* * Buttons efects */
+    --color-three: #fff; /* * Background */
+    --color-three-alternative: #ddd; /* * Background efects */
+    --color-four: #ddd; /* * Borders efects */
+    --color-four-alternative: #ddd; /* * Borders efects */
+    --color-five: #ddd; /* * Icons */
+    --color-five-alternative: #ddd; /* * Icons efects */
+    --shadow-color: #32B1DA;
     overflow: hidden;
     transition: 500ms;
     height: auto;
-    z-index: 9;
+    z-index: 11;
     box-sizing: border-box;
 }
 
-.dropdown-js .dropdown-title{
+.dropdown.opened{
+    overflow: visible;
+}
+
+.dropdown .dropdown-title{
     position: relative;
     display: inline-flex;
     justify-content: space-between;
@@ -22,18 +32,19 @@
     color: var(--color-one);
     background-color: var(--color-three);
     transition: 500ms;
+    border-radius: .25rem;
+    padding: .5rem;
 }
 
-.dropdown-js.opened .dropdown-title,
-.dropdown-js .dropdown-title:hover{
+.dropdown.opened .dropdown-title,
+.dropdown .dropdown-title:hover{
     background-color: var(--color-three-alternative);
 }
 
-.dropdown-js .dropdown-title .dropdown-btn{
+.dropdown .dropdown-title .dropdown-button{
     position: relative;
     display: inline-block;
     width: fit-content;
-    height: 100%;
     box-sizing: border-box;
     text-decoration: none;
     color: var(--color-two);
@@ -42,36 +53,46 @@
     transition: 500ms;
 }
 
-.dropdown-js .dropdown-title .dropdown-btn:focus{
+.dropdown .dropdown-title .dropdown-button:focus{
     outline: none;
 }
 
-.dropdown-js .dropdown-title .dropdown-btn:hover{
+.dropdown .dropdown-title .dropdown-button:hover,
+.dropdown .dropdown-title .dropdown-button:focus{
     color: var(--color-two-alternative);
 }
 
-.dropdown-js .dropdown-title .dropdown-btn .dropdown-icon{
-    position: relative;
-    padding-left: .5rem;
+.dropdown .dropdown-title .dropdown-button .dropdown-icon{
+    /* position: relative; */
+    margin-left: .5rem;
 }
 
-.dropdown-js .dropdown-menu .dropdown-link{
+.dropdown .dropdown-menu-list{
+    height: auto;
+    padding-top: 1rem;
+}
+
+.dropdown.closed ul.dropdown-menu-list{
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.dropdown .dropdown-menu-list .dropdown-link{
     display: inline-flex;
     align-items: center;
     height: 2.3rem;
     line-height: 2.3rem;
     text-decoration: none;
-    border: none;
-    background-color: transparent;
-    color: var(--color-one);
+    color: var(--color-two);
     transition: 500ms;
 }
 
-.dropdown-js .dropdown-menu .dropdown-link:hover{
-    color: var(--color-one-alternative);
+.dropdown .dropdown-menu-list .dropdown-link:hover{
+    color: var(--color-two-alternative);
 }
 
-.dropdown-js .dropdown-menu .dropdown-link .link-text{
+.dropdown .dropdown-menu-list .dropdown-link .link-text{
     white-space: nowrap;
 }
 
@@ -82,16 +103,16 @@
 
 /* LG */
 @media(min-width: 1024px){
-    .dropdown-js{
+    .dropdown{
         position: relative;
     }
     
-    .dropdown-js.opened,
-    .dropdown-js:hover{
+    .dropdown.opened,
+    .dropdown:hover{
         overflow: visible;
     }
 
-    .dropdown-js .dropdown-menu{
+    .dropdown .dropdown-menu-list{
         position: absolute;
         top: 100%;
         left: 50%;
