@@ -1,0 +1,60 @@
+[33mcommit b6596072a09650f2c10abf9e9818cfe211045d23[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Archimak <43325751+JuanCruzAGB@users.noreply.github.com>
+Date:   Tue Aug 18 22:17:56 2020 -0300
+
+    Active state started
+
+[33mcommit 0851353bc56d32028833d37d9d066c40d98edd90[m
+Author: Archimak <43325751+JuanCruzAGB@users.noreply.github.com>
+Date:   Mon Aug 17 19:27:44 2020 -0300
+
+    z-index modified
+
+[33mcommit 5bb47dbe13d144b67cecd68505a22042cced7d85[m
+Author: Archimak <43325751+JuanCruzAGB@users.noreply.github.com>
+Date:   Tue Aug 11 21:08:18 2020 -0300
+
+    Dropdown dektop without prolems
+
+[33mcommit 9f699f3b0fc1b5fd621ce8066da8770152d554dd[m
+Merge: 0f559ab 48b2e39
+Author: Archimak <43325751+JuanCruzAGB@users.noreply.github.com>
+Date:   Mon Aug 10 20:03:08 2020 -0300
+
+    Merge conflicts
+
+[33mcommit 0f559abfaf81ec23f77bf4d778fe0839ea465ad0[m
+Author: Archimak <43325751+JuanCruzAGB@users.noreply.github.com>
+Date:   Mon Aug 10 19:55:27 2020 -0300
+
+    New version
+
+[33mcommit 48b2e39ada175d41a5f12a15106838b0b3731c41[m
+Author: JuanCruzAGB <juancarmentia@gmail.com>
+Date:   Fri Aug 7 16:39:02 2020 -0300
+
+    Dropdown activado para mobile
+
+[33mcommit 4a219892c1e810ab572ad3b41f1254144f9d7c6b[m
+Author: JuanCruzAGB <juancarmentia@gmail.com>
+Date:   Tue Aug 4 19:45:27 2020 -0300
+
+    Dropdown is opened if a Dropdown child is open
+
+[33mcommit 91fce32f8ceb772506e8049ba17166ba0b398c88[m
+Author: JuanCruzAGB <juancarmentia@gmail.com>
+Date:   Tue Aug 4 13:28:29 2020 -0300
+
+    Desktop css edited
+
+[33mcommit a087149f08e2ebd37c440d546f088c3fd7c46e17[m
+Author: JuanCruzAGB <juancarmentia@gmail.com>
+Date:   Sun Aug 2 16:52:10 2020 -0300
+
+    Files created
+
+[33mcommit 74a18d426e812285a97aaf14d7818ffc8957ad82[m
+Author: Archimak <43325751+JuanCruzAGB@users.noreply.github.com>
+Date:   Sun Aug 2 16:46:39 2020 -0300
+
+    Initial commit
