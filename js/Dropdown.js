@@ -16,6 +16,7 @@ export class Dropdown{
         id: 'dropdown-1',
     }, states = {
         open: false,
+        active: '',
     }){
         // TODO Edit custom errors.
         this.setProperties(properties);
@@ -24,6 +25,7 @@ export class Dropdown{
         this.setButton();
         this.setIcon();
         this.checkOpenedDropdown();
+        this.checkActiveDropdown();
     }
 
     /**
@@ -45,9 +47,11 @@ export class Dropdown{
      */
     setStates(states = {
         open: false,
+        active: '',
     }){
         this.states = {};
         this.setOpen(states);
+        this.setActive(states);
     }
 
     /**
@@ -73,6 +77,17 @@ export class Dropdown{
     }
 
     /**
+     * * Set the Dropdown active state.
+     * @param {object} states - Dropdown states.
+     * @memberof Dropdown
+     */
+    setActive(states = {
+        active: '',
+    }){
+        this.states.active = states.active;
+    }
+
+    /**
      * * Set the Dropdown HTML Element.
      * @memberof Dropdown
      */
@@ -83,6 +98,7 @@ export class Dropdown{
                 this.html = dropdown;
             }
         }
+        this.setChilds();
     }
 
     /**
@@ -118,6 +134,18 @@ export class Dropdown{
             if(child.classList.contains('dropdown-icon')){
                 this.icon = new Icon(child);
             }
+        }
+    }
+
+    /**
+     * * Set the Dropdown childs.
+     * @memberof Dropdown
+     */
+    setChilds(){
+        let dropdown_childs = document.querySelectorAll(`#${this.properties.id} > li > .dropdown-link, #${this.properties.id} > li > .dropdown-buton`);
+        this.childs = [];
+        for(const dropdown of dropdown_childs){
+            this.childs.push(dropdown);
         }
     }
 
@@ -163,13 +191,31 @@ export class Dropdown{
         this.icon.switch();
     }
 
+    activate(){
+        console.log(this.childs);
+        for(const child of this.childs){
+            console.log(child);
+        }
+    }
+
     /**
      * * Check if should be a current Dropdown open.
      * @memberof Dropdown
      */
     checkOpenedDropdown(){
         if(this.states.open){
+            this.states.open = false;
             this.switch();
+        }
+    }
+
+    /**
+     * * Check if should be a current Dropdown active.
+     * @memberof Dropdown
+     */
+    checkActiveDropdown(){
+        if(this.states.active != ''){
+            this.activate();
         }
     }
 }
