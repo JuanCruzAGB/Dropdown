@@ -191,6 +191,10 @@ export class Dropdown{
         this.icon.switch();
     }
 
+    /**
+     * * Active a Dropdown-link.
+     * @memberof Dropdown
+     */
     activate(){
         console.log(this.childs);
         for(const child of this.childs){
