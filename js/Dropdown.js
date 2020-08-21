@@ -196,9 +196,9 @@ export class Dropdown{
      * @memberof Dropdown
      */
     activate(){
-        console.log(this.childs);
+        // console.log(this.childs);
         for(const child of this.childs){
-            console.log(child);
+            // console.log(child);
         }
     }
 
