@@ -15,6 +15,7 @@ export class Dropdown{
     constructor(properties = {
         id: 'dropdown-1',
     }, states = {
+        click: false,
         open: false,
         active: '',
     }){
@@ -46,10 +47,12 @@ export class Dropdown{
      * @memberof Dropdown
      */
     setStates(states = {
+        click: false,
         open: false,
         active: '',
     }){
         this.states = {};
+        this.setClick(states);
         this.setOpen(states);
         this.setActive(states);
     }
@@ -63,6 +66,17 @@ export class Dropdown{
         id: 'dropdown-1',
     }){
         this.properties.id = properties.id;
+    }
+
+    /**
+     * * Set the Dropdown click state.
+     * @param {object} states - Dropdown states.
+     * @memberof Dropdown
+     */
+    setClick(states = {
+        click: false,
+    }){
+        this.states.click = states.click;
     }
 
     /**
