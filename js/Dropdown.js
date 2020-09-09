@@ -123,7 +123,7 @@ export class Dropdown{
     setButton(){
         let dropdown = this;
         for(const child of this.html.children){
-            if(child.classList.contains('dropdown-title')){
+            if(child.classList.contains('dropdown-header')){
                 if(child.children.length){
                     for(const subchild of child.children){
                         if(subchild.classList.contains('dropdown-button')){

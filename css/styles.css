@@ -1,7 +1,6 @@
-
-
 .dropdown{
     --color-one: #222; /* * Titles */
+    --color-one-alternative: #222; /* * Titles efects */
     --color-two: #222; /* * Buttons */
     --color-two-alternative: #000; /* * Buttons efects */
     --color-three: #fff; /* * Background */
@@ -22,7 +21,7 @@
     overflow: visible;
 }
 
-.dropdown .dropdown-title{
+.dropdown .dropdown-header{
     position: relative;
     display: inline-flex;
     justify-content: space-between;
@@ -36,7 +35,12 @@
     padding: .5rem;
 }
 
-.dropdown .dropdown-title .dropdown-button{
+.dropdown.opened .dropdown-header{
+    background-color: var(--color-three-alternative);
+    color: var(--color-one-alternative);
+}
+
+.dropdown .dropdown-header .dropdown-button{
     position: relative;
     display: inline-block;
     width: fit-content;
@@ -49,16 +53,16 @@
     transition: 500ms;
 }
 
-.dropdown .dropdown-title .dropdown-button:focus{
+.dropdown .dropdown-header .dropdown-button:focus{
     outline: none;
 }
 
-.dropdown:not(.dropdown-click) .dropdown-title .dropdown-button:hover,
-.dropdown .dropdown-title .dropdown-button:focus{
+.dropdown:not(.dropdown-click) .dropdown-header .dropdown-button:hover,
+.dropdown .dropdown-header .dropdown-button:focus{
     color: var(--color-two-alternative);
 }
 
-.dropdown .dropdown-title .dropdown-button .dropdown-icon{
+.dropdown .dropdown-header .dropdown-button .dropdown-icon{
     margin-left: .5rem;
 }
 
