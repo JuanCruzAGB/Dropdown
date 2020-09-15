@@ -124,6 +124,7 @@ export class Dropdown{
         let dropdown = this;
         for(const child of this.html.children){
             if(child.classList.contains('dropdown-header')){
+                this.header = child;
                 if(child.children.length){
                     for(const subchild of child.children){
                         if(subchild.classList.contains('dropdown-button')){
@@ -133,7 +134,7 @@ export class Dropdown{
                 }
             }
         }
-        this.btn.addEventListener('click', function(e){
+        this.header.addEventListener('click', function(e){
             e.preventDefault();
             dropdown.switch();
         });
