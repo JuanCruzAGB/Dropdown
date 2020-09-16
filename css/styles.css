@@ -11,7 +11,7 @@
     --color-five-alternative: #ddd; /* * Icons efects */
     --shadow-color: #32B1DA;
     overflow: hidden;
-    transition: 500ms;
+    /* transition: 500ms; */
     height: auto;
     z-index: 12;
     box-sizing: border-box;
@@ -30,7 +30,7 @@
     text-decoration: none;
     color: var(--color-one);
     background-color: var(--color-three);
-    transition: 500ms;
+    /* transition: 500ms; */
     border-radius: .25rem;
     padding: .5rem;
 }
@@ -66,12 +66,14 @@
     margin-left: .5rem;
 }
 
-.dropdown .dropdown-menu-list{
+.dropdown .dropdown-menu-list,
+.dropdown .dropdown-menu-content{
     height: auto;
     margin-top: 1rem;
 }
 
-.dropdown.closed ul.dropdown-menu-list{
+.dropdown.closed ul.dropdown-menu-list,
+.dropdown.closed .dropdown-menu-content{
     height: 0;
     overflow: hidden;
     margin: 0;
@@ -83,7 +85,7 @@
     height: 2.3rem;
     text-decoration: none;
     color: var(--color-two);
-    transition: 500ms;
+    /* transition: 500ms; */
 }
 
 .dropdown .dropdown-menu-list .dropdown-link:hover{
@@ -111,7 +113,9 @@
     }
 
     .dropdown.closed:not(.dropdown-click):hover .dropdown-menu-list,
-    .dropdown .dropdown-menu-list{
+    .dropdown:not(.dropdown-click) .dropdown-menu-list,
+    .dropdown.closed:not(.dropdown-click):hover .dropdown-menu-content,
+    .dropdown:not(.dropdown-click) .dropdown-menu-content{
         position: absolute;
         top: 100%;
         left: 50%;
@@ -126,15 +130,18 @@
         border-radius: 0;
     }
 
-    .dropdown.opened.dropdown-click  .dropdown-menu-list{
-        /**/
+    .dropdown.opened.dropdown-click .dropdown-menu-list,
+    .dropdown.opened.dropdown-click .dropdown-menu-content{
+        /* TODO */
     }
 
-    .dropdown .dropdown-menu-list{
+    .dropdown .dropdown-menu-list,
+    .dropdown .dropdown-menu-content{
         margin: 0;
     }
 
-    .dropdown.opened .dropdown-menu-list{
+    .dropdown.opened .dropdown-menu-list,
+    .dropdown.opened .dropdown-menu-content{
         background-color: var(--color-three-alternative);
     }
 }
