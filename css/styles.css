@@ -64,6 +64,11 @@
 
 .dropdown .dropdown-header .dropdown-button .dropdown-icon{
     margin-left: .5rem;
+    color: var(--dropdown-icon-color);
+}
+
+.dropdown.opened .dropdown-header .dropdown-button .dropdown-icon{
+    color: var(--dropdown-icon-color-alternative);
 }
 
 .dropdown .dropdown-menu-list,
