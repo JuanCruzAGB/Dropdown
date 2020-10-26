@@ -67,6 +67,9 @@ export class Icon{
         }else if(this.html.classList.contains('fa-angle-down')){
             this.html.classList.remove('fa-angle-down');
             arrow = 'angle';
+        }else if(this.html.classList.contains('fa-chevron-down')){
+            this.html.classList.remove('fa-chevron-down');
+            arrow = 'chevron';
         }
         this.html.classList.add(`fa-${arrow}-up`);
     }
@@ -84,6 +87,9 @@ export class Icon{
         }else if(this.html.classList.contains('fa-angle-up')){
             this.html.classList.remove('fa-angle-up');
             arrow = 'angle';
+        }else if(this.html.classList.contains('fa-chevron-up')){
+            this.html.classList.remove('fa-chevron-up');
+            arrow = 'chevron';
         }
         this.html.classList.add(`fa-${arrow}-down`);
     }

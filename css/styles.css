@@ -74,14 +74,15 @@
 .dropdown .dropdown-menu-list,
 .dropdown .dropdown-menu-content{
     height: auto;
+    overflow: hidden;
+    margin: 0;
     margin-top: 1rem;
+    transition: 2s;
 }
 
 .dropdown.closed ul.dropdown-menu-list,
 .dropdown.closed .dropdown-menu-content{
-    height: 0;
-    overflow: hidden;
-    margin: 0;
+    max-height: 0;
 }
 
 .dropdown .dropdown-menu-list .dropdown-link{
@@ -137,7 +138,7 @@
 
     .dropdown.opened.dropdown-click .dropdown-menu-list,
     .dropdown.opened.dropdown-click .dropdown-menu-content{
-        /* TODO */
+        max-height: 1000vh;
     }
 
     .dropdown .dropdown-menu-list,
