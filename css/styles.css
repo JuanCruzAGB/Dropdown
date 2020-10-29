@@ -80,6 +80,11 @@
     transition: 2s;
 }
 
+.dropdown.opened .dropdown-menu-list,
+.dropdown.opened .dropdown-menu-content{
+    max-height: 100vh; /* TODO */
+}
+
 .dropdown.closed ul.dropdown-menu-list,
 .dropdown.closed .dropdown-menu-content{
     max-height: 0;
@@ -134,11 +139,6 @@
         border: none;
         padding: .5rem 1rem;
         border-radius: 0;
-    }
-
-    .dropdown.opened.dropdown-click .dropdown-menu-list,
-    .dropdown.opened.dropdown-click .dropdown-menu-content{
-        max-height: 1000vh;
     }
 
     .dropdown .dropdown-menu-list,

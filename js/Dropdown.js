@@ -14,6 +14,19 @@ export class Dropdown{
      */
     constructor(properties = {
         id: 'dropdown-1',
+        callback: {
+            open: {
+                functionName: function(params) { /* console.log(params); */ },
+                params: [
+                    //
+                ],
+            }, close : {
+                functionName: function(params) { /* console.log(params); */ },
+                params: [
+                    //
+                ],
+            }
+        }
     }, states = {
         click: false,
         open: false,
@@ -36,9 +49,23 @@ export class Dropdown{
      */
     setProperties(properties = {
         id: 'dropdown-1',
+        callback: {
+            open: {
+                functionName: function(params) { /* console.log(params); */ },
+                params: [
+                    //
+                ],
+            }, close : {
+                functionName: function(params) { /* console.log(params); */ },
+                params: [
+                    //
+                ],
+            }
+        }
     }){
         this.properties = {};
         this.setId(properties);
+        this.setCallback(properties);
     }
 
     /**
@@ -66,6 +93,65 @@ export class Dropdown{
         id: 'dropdown-1',
     }){
         this.properties.id = properties.id;
+    }
+
+    /**
+     * * Set the Dropdown callback.
+     * @param {object} properties - Dropdown properties.
+     * @memberof Dropdown
+     */
+    setCallback(properties = {
+        callback: {
+            open: {
+                functionName: function(params) { /* console.log(params); */ },
+                params: [
+                    //
+                ],
+            }, close : {
+                functionName: function(params) { /* console.log(params); */ },
+                params: [
+                    //
+                ],
+            }
+        }
+    }){
+        if(properties.hasOwnProperty('callback')){
+            this.properties.callback = {};
+            if(properties.callback.hasOwnProperty('open')){
+                this.properties.callback.open = properties.callback.open;
+            }else{
+                this.properties.callback.open = {
+                    functionName: function(params) { /* console.log(params); */ },
+                    params: [
+                        //
+                    ],
+                };
+            }
+            if(properties.callback.hasOwnProperty('close')){
+                this.properties.callback.close = properties.callback.close;
+            }else{
+                this.properties.callback.close = {
+                    functionName: function(params) { /* console.log(params); */ },
+                    params: [
+                        //
+                    ],
+                };
+            }
+        }else{
+            this.properties.callback = {
+                open: {
+                    functionName: function(params) { /* console.log(params); */ },
+                    params: [
+                        //
+                    ],
+                }, close : {
+                    functionName: function(params) { /* console.log(params); */ },
+                    params: [
+                        //
+                    ],
+                }
+            };
+        }
     }
 
     /**
@@ -170,12 +256,19 @@ export class Dropdown{
      * @memberof Dropdown
      */
     switch(){
+        let params;
         switch(this.states.open){
             case true:
                 this.close();
+                params = this.properties.callback.close.params;
+                params.dropdown = this;
+                this.properties.callback.close.functionName(params);
                 return false;
             case false:
                 this.open();
+                params = this.properties.callback.open.params;
+                params.dropdown = this;
+                this.properties.callback.open.functionName(params);
                 return true;
         }
     }
