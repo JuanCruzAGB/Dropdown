@@ -139,6 +139,7 @@
         border: none;
         padding: .5rem 1rem;
         border-radius: 0;
+        max-height: 100vh; /* TODO */
     }
 
     .dropdown .dropdown-menu-list,
