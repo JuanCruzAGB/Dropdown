@@ -1,6 +1,17 @@
 // ? JuanCruzAGB repository
 import Class from "../../JuanCruzAGB/js/Class.js";
 
+/** @var {object} defaultProps Default properties. */
+let defaultProps = {
+    id: 'dropdown-1',
+};
+
+/** @var {object} defaultState Default state. */
+let defaultState = {
+    open: false,
+    active: false,
+};
+
 /**
  * * Dropdown makes an excellent dropdown.
  * @export
@@ -15,7 +26,7 @@ export class Dropdown extends Class {
      * @param {string} [props.id='dropdown-1'] Dropdown primary key.
      * @param {object} [state] Dropdown state:
      * @param {boolean} [state.open=false] Dropdown open state.
-     * @param {string} [state.active=null] Dropdown active state.
+     * @param {string} [state.active=false] Dropdown active state.
      * @param {object} [callbacks] Dropdown callbacks:
      * @param {object} [callbacks.open] Dropdown open callback:
      * @param {object} [callbacks.open.function] Dropdown open callback function.
@@ -29,7 +40,7 @@ export class Dropdown extends Class {
         id: 'dropdown-1',
     }, state = {
         open: false,
-        active: null,
+        active: false,
     }, callbacks = {
         open: {
             function: () => { /* console.log('OPEN'); */ },
@@ -43,15 +54,15 @@ export class Dropdown extends Class {
             ],
         }
     }) {
-        super(props, state);
+        super({ ...defaultProps, ...props }, { ...defaultState, ...state });
         this.setCallbacks(callbacks);
         for(const dropdown of document.querySelectorAll('.dropdown')){
             if(dropdown.id == this.props.id){
                 this.setHTML(dropdown);
             }
         }
-        this.setChilds();
         this.setButton();
+        this.setBody();
         this.checkState();
     }
 
@@ -71,10 +82,6 @@ export class Dropdown extends Class {
     checkOpenState () {
         if (this.state.open) {
             this.open();
-            this.callbacks.open.function({
-                ...this.callbacks.open.params,
-                dropdown: this,
-            });
         }
     }
 
@@ -95,33 +102,17 @@ export class Dropdown extends Class {
      */
     setButton () {
         let dropdown = this;
-        for (const child of this.html.children) {
-            if (child.classList.contains('dropdown-header')) {
-                this.header = child;
-                if (child.children.length) {
-                    for (const subchild of child.children) {
-                        if (subchild.classList.contains('dropdown-button')) {
-                            this.button = subchild;
-                        }
-                    }
-                }
-            }
+        if (document.querySelector(`#${ this.props.id }.dropdown .dropdown-header .dropdown-button`)) {
+            this.button = document.querySelector(`#${ this.props.id }.dropdown .dropdown-header .dropdown-button`);
+            this.button.addEventListener('click', function (e) {
+                e.preventDefault();
+                dropdown.switch();
+            });
         }
-        this.header.addEventListener('click', function (e) {
-            e.preventDefault();
-            dropdown.switch();
-        });
     }
 
-    /**
-     * * Set the Dropdown childs.
-     * @memberof Dropdown
-     */
-    setChilds () {
-        this.childs = [];
-        for (const dropdown of document.querySelectorAll(`#${ this.props.id } > li > .dropdown-link, #${ this.props.id } > li > .dropdown-buton`)) {
-            this.childs.push(dropdown);
-        }
+    setBody () {
+        this.body = document.querySelector(`#${ this.props.id }.dropdown .dropdown-body`);
     }
 
     /**
@@ -132,20 +123,10 @@ export class Dropdown extends Class {
     switch () {
         switch (this.state.open) {
             case true:
-                console.log('Dropdown close');
                 this.close();
-                this.callbacks.close.function({
-                    ...this.callbacks.close.params,
-                    dropdown: this,
-                });
                 return false;
             case false:
-                console.log('Dropdown open');
                 this.open();
-                this.callbacks.open.function({
-                    ...this.callbacks.open.params,
-                    dropdown: this,
-                });
                 return true;
         }
     }
@@ -160,6 +141,11 @@ export class Dropdown extends Class {
             this.html.classList.remove('closed');
         }
         this.html.classList.add('opened');
+        this.html.style.setProperty('--height', this.body.offsetTop);
+        this.callbacks.open.function({
+            ...this.callbacks.open.params,
+            dropdown: this,
+        });
     }
 
     /**
@@ -172,17 +158,11 @@ export class Dropdown extends Class {
             this.html.classList.remove('opened');
         }
         this.html.classList.add('closed');
-    }
-
-    /**
-     * * Active a Dropdown-link.
-     * @memberof Dropdown
-     */
-    activate () {
-        for (const child of this.childs) {
-            console.log(child);
-            console.log(this.state.active);
-        }
+        this.html.style.setProperty('--height', 0);
+        this.callbacks.close.function({
+            ...this.callbacks.close.params,
+            dropdown: this,
+        });
     }
 }
 
