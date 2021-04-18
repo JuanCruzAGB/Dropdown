@@ -62,7 +62,7 @@ export class Dropdown extends Class {
             }
         }
         this.setButton();
-        this.setBody();
+        this.setContent();
         this.checkState();
     }
 
@@ -111,13 +111,18 @@ export class Dropdown extends Class {
         }
     }
 
-    setBody () {
-        this.body = document.querySelector(`#${ this.props.id }.dropdown .dropdown-body`);
+    /**
+     * * Set the Dropdown content.
+     * @memberof Dropdown
+     */
+    setContent () {
+        this.content = document.querySelector(`#${ this.props.id }.dropdown .dropdown-content`);
+        this.html.style.setProperty('--height', this.content.offsetTop + 'px');
     }
 
     /**
      * * Switch the Dropdown open state.
-     * @returns
+     * @returns {boolean}
      * @memberof Dropdown
      */
     switch () {
@@ -141,7 +146,6 @@ export class Dropdown extends Class {
             this.html.classList.remove('closed');
         }
         this.html.classList.add('opened');
-        this.html.style.setProperty('--height', this.body.offsetTop);
         this.callbacks.open.function({
             ...this.callbacks.open.params,
             dropdown: this,
@@ -158,7 +162,6 @@ export class Dropdown extends Class {
             this.html.classList.remove('opened');
         }
         this.html.classList.add('closed');
-        this.html.style.setProperty('--height', 0);
         this.callbacks.close.function({
             ...this.callbacks.close.params,
             dropdown: this,
