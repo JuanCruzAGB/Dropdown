@@ -117,6 +117,8 @@ export class Dropdown extends Class {
      */
     setContent () {
         this.content = document.querySelector(`#${ this.props.id }.dropdown .dropdown-content`);
+        this.html.style.setProperty('--height', 'fit-content');
+        // this.html.style.setProperty('--height', this.content.offsetTop + 'px');
     }
 
     /**
@@ -141,8 +143,6 @@ export class Dropdown extends Class {
      */
     open () {
         this.setState('open', true);
-        this.html.style.setProperty('--height', 'fit-content');
-        // this.html.style.setProperty('--height', this.content.offsetTop + 'px');
         if(this.html.classList.contains('closed')){
             this.html.classList.remove('closed');
         }
@@ -159,7 +159,6 @@ export class Dropdown extends Class {
      */
     close () {
         this.setState('open', false);
-        this.html.style.setProperty('--height', '0px');
         if(this.html.classList.contains('opened')){
             this.html.classList.remove('opened');
         }
