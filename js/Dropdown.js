@@ -1,16 +1,8 @@
 // ? JuanCruzAGB repository
 import Class from "../../JuanCruzAGB/js/Class.js";
 
-/** @var {object} defaultProps Default properties. */
-let defaultProps = {
-    id: 'dropdown-1',
-};
-
-/** @var {object} defaultState Default state. */
-let defaultState = {
-    open: false,
-    active: false,
-};
+// ? Dropdown repository
+import Button from "./Button.js";
 
 /**
  * * Dropdown makes an excellent dropdown.
@@ -19,51 +11,58 @@ let defaultState = {
  * @extends {Class}
  * @author Juan Cruz Armentia <juancarmentia@gmail.com>
  */
-export class Dropdown extends Class {
+export default class Dropdown extends Class {
     /**
      * * Creates an instance of Dropdown.
-     * @param {object} [props] Dropdown properties:
-     * @param {string} [props.id='dropdown-1'] Dropdown primary key.
-     * @param {object} [state] Dropdown state:
-     * @param {boolean} [state.open=false] Dropdown open state.
-     * @param {string} [state.active=false] Dropdown active state.
-     * @param {object} [callbacks] Dropdown callbacks:
-     * @param {object} [callbacks.open] Dropdown open callback:
-     * @param {object} [callbacks.open.function] Dropdown open callback function.
-     * @param {object} [callbacks.open.params] Dropdown open callback params.
-     * @param {object} [callbacks.close] Dropdown close callback:
-     * @param {object} [callbacks.close.function] Dropdown close callback function.
-     * @param {object} [callbacks.close.params] Dropdown close callback params.
+     * @param {object} [data]
+     * @param {object} [data.props]
+     * @param {string} [data.props.id="dropdown-1"] Dropdown primary key.
+     * @param {object} [data.state]
+     * @param {boolean} [data.state.open=false] If the Dropdown should be opened.
+     * @param {object} [data.callbacks]
+     * @param {object} [data.callbacks.close]
+     * @param {function} [data.callbacks.close.function]
+     * @param {object} [data.callbacks.close.params]
+     * @param {object} [data.callbacks.open]
+     * @param {Function0} [data.callbacks.open.function]
+     * @param {object} [data.callbacks.open.params]
+     * @param {object} [data.callbacks.switch]
+     * @param {Function0} [data.callbacks.switch.function]
+     * @param {object} [data.callbacks.switch.params]
      * @memberof Dropdown
      */
-    constructor (props = {
-        id: 'dropdown-1',
-    }, state = {
-        open: false,
-        active: false,
-    }, callbacks = {
-        open: {
-            function: () => { /* console.log('OPEN'); */ },
-            params: [
-                //
-            ],
-        }, close : {
-            function: () => { /* console.log('CLOSE'); */ },
-            params: [
-                //
-            ],
-        }
+    constructor (data = {
+        props: {
+            id: "dropdown-1",
+        }, state: {
+            open: false,
+        }, callbacks: {
+            close : {
+                function: (params) => { /* console.log(params); */ },
+                params: {},
+            }, open: {
+                function: (params) => { /* console.log(params); */ },
+                params: {},
+            }, switch: {
+                function: (params) => { /* console.log(params); */ },
+                params: {},
+            }, 
+        },
     }) {
-        super({ ...defaultProps, ...props }, { ...defaultState, ...state });
-        this.setCallbacks(callbacks);
-        for(const dropdown of document.querySelectorAll('.dropdown')){
-            if(dropdown.id == this.props.id){
-                this.setHTML(dropdown);
-            }
-        }
+        super({ ...Dropdown.props, ...((data && data.hasOwnProperty("props")) ? data.props : {}) }, { ...Dropdown.state, ...((data && data.hasOwnProperty("state")) ? data.state : {}) });
+        this.setCallbacks({ ...Dropdown.callbacks, ...((data && data.hasOwnProperty("callbacks")) ? data.callbacks : {}) });
+        this.setHTML(`${ this.props.id }.dropdown`);
         this.setButton();
         this.setContent();
         this.checkState();
+    }
+
+    /**
+     * * Set the Dropdown Button.
+     * @memberof Dropdown
+     */
+    setButton () {
+        this.button = Button.generate(this);
     }
 
     /**
@@ -72,7 +71,6 @@ export class Dropdown extends Class {
      */
     checkState () {
         this.checkOpenState();
-        this.checkActiveState();
     }
 
     /**
@@ -84,41 +82,39 @@ export class Dropdown extends Class {
             this.open();
         }
     }
-
+    
     /**
-     * * Check the Dropdown active state.
+     * * Close the Dropdown.
+     * @param {object} [params]
      * @memberof Dropdown
      */
-    checkActiveState () {
-        if (this.state.active) {
-            this.activate();
-        }
+    close (params = {}) {
+        this.setState("open", false);
+        this.html.classList.remove("opened");
+        this.button.inactive();
+        this.execute("close", {
+            ...params,
+            ...this.callbacks.close.params,
+            open: this.state.open,
+            Dropdown: this,
+        });
     }
-
-    /**
-     * * Set the btn.
-     * @param {object} properties - Dropdown properties.
+    
+	/**
+     * * Open the Dropdown.
+     * @param {object} [params]
      * @memberof Dropdown
      */
-    setButton () {
-        let dropdown = this;
-        if (document.querySelector(`#${ this.props.id }.dropdown .dropdown-button`)) {
-            this.button = document.querySelector(`#${ this.props.id }.dropdown .dropdown-button`);
-            this.button.addEventListener('click', function (e) {
-                e.preventDefault();
-                dropdown.switch();
-            });
-        }
-    }
-
-    /**
-     * * Set the Dropdown content.
-     * @memberof Dropdown
-     */
-    setContent () {
-        this.content = document.querySelector(`#${ this.props.id }.dropdown .dropdown-content`);
-        this.html.style.setProperty('--height', 'fit-content');
-        // this.html.style.setProperty('--height', this.content.offsetTop + 'px');
+    open (params = {}) {
+        this.setState("open", true);
+        this.html.classList.add("opened");
+        this.button.active();
+        this.execute("open", {
+            ...params,
+            ...this.callbacks.open.params,
+            open: this.state.open,
+            Dropdown: this,
+        });
     }
 
     /**
@@ -126,49 +122,56 @@ export class Dropdown extends Class {
      * @returns {boolean}
      * @memberof Dropdown
      */
-    switch () {
-        switch (this.state.open) {
+    switch (open = false, params = {}) {
+        if (typeof open != "boolean") {
+            console.error("Open param is required & should be a boolean, to switch the Dropdown");
+            return false;
+        }
+        switch (open) {
             case true:
                 this.close();
-                return false;
             case false:
                 this.open();
-                return true;
         }
+        this.execute("switch", {
+            ...params,
+            ...this.callbacks.switch.params,
+            open: open,
+            Dropdown: this,
+        });
+        return open;
     }
 
     /**
-     * * Open the Dropdown.
-     * @memberof Dropdown
+     * @static
+     * @var {object} props Default properties.
      */
-    open () {
-        this.setState('open', true);
-        if(this.html.classList.contains('closed')){
-            this.html.classList.remove('closed');
-        }
-        this.html.classList.add('opened');
-        this.callbacks.open.function({
-            ...this.callbacks.open.params,
-            dropdown: this,
-        });
-    }
-
+    static props = {
+        id: "dropdown-1",
+    };
+    
     /**
-     * * Close the Dropdown.
-     * @memberof Dropdown
+     * @static
+     * @var {object} state Default state.
      */
-    close () {
-        this.setState('open', false);
-        if(this.html.classList.contains('opened')){
-            this.html.classList.remove('opened');
-        }
-        this.html.classList.add('closed');
-        this.callbacks.close.function({
-            ...this.callbacks.close.params,
-            dropdown: this,
-        });
-    }
+    static state = {
+        open: false,
+    };
+    
+    /**
+     * @static
+     * @var {object} callbacks Default callbacks.
+     */
+    static callbacks = {
+        close : {
+            function: (params) => { /* console.log(params); */ },
+            params: {},
+        }, open: {
+            function: (params) => { /* console.log(params); */ },
+            params: {},
+        }, switch: {
+            function: (params) => { /* console.log(params); */ },
+            params: {},
+        }, 
+    };
 }
-
-// ? Default export
-export default Dropdown;
