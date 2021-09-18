@@ -27,12 +27,11 @@ export default class Button extends Class {
         }, htmls, Dropdown,
     }) {
         super({ ...Button.props, ...((data && data.hasOwnProperty("props")) ? data.props : {}) });
-        // TODO: If the html was not found, create it with HTMLCreatorJS
-        this.setHTMLs([ ...((data && data.hasOwnProperty("htmls")) ? data.htmls : []) ], Dropdown);
+        this.setHTMLs([ ...((data && data.hasOwnProperty("htmls")) ? data.htmls : []) ], data.Dropdown);
     }
 
     /**
-     * * Set the Button HTMLs.
+     * * Set the Button HTML Elements.
      * @param {HTMLElement[]} htmls
      * @param {Dropdown} Dropdown Button Dropdown parent.
      * @memberof Button

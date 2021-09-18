@@ -148,7 +148,7 @@ export default class Dropdown extends Class {
      */
     static props = {
         id: "dropdown-1",
-    };
+    }
     
     /**
      * @static
@@ -156,7 +156,7 @@ export default class Dropdown extends Class {
      */
     static state = {
         open: false,
-    };
+    }
     
     /**
      * @static
@@ -173,5 +173,11 @@ export default class Dropdown extends Class {
             function: (params) => { /* console.log(params); */ },
             params: {},
         }, 
-    };
+    }
+
+    /** 
+     * @static
+     * @var {Button} Button
+     */
+    static Button = Button
 }
