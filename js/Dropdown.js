@@ -130,8 +130,10 @@ export default class Dropdown extends Class {
         switch (open) {
             case true:
                 this.close();
+                break;
             case false:
                 this.open();
+                break;
         }
         this.execute("switch", {
             ...params,
