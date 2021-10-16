@@ -1,12 +1,12 @@
 :root {
     --dropdown-header-color: #222;
-    --dropdown-header-color-alternative: #222;
+    --dropdown-header-color-alt: #222;
     --dropdown-header-background-color: #fff;
-    --dropdown-header-background-color-alternative: #ddd;
+    --dropdown-header-background-color-alt: #ddd;
     --dropdown-content-color: #222;
-    --dropdown-content-color-alternative: #222;
+    --dropdown-content-color-alt: #222;
     --dropdown-content-background-color: #fff;
-    --dropdown-content-background-color-alternative: #ddd;
+    --dropdown-content-background-color-alt: #ddd;
 }
 
 .dropdown {
@@ -28,8 +28,8 @@
 }
 
 .dropdown.opened .dropdown-header {
-    color: var(--dropdown-header-color-alternative);
-    background-color: var(--dropdown-header-background-color-alternative);
+    color: var(--dropdown-header-color-alt);
+    background-color: var(--dropdown-header-background-color-alt);
 }
 
 .dropdown .dropdown-content {
@@ -54,7 +54,7 @@
 }
 
 .dropdown .dropdown-content .dropdown-link:hover {
-    color: var(--dropdown-content-color-alternative);
+    color: var(--dropdown-content-color-alt);
 }
 
 /* ? MD */
