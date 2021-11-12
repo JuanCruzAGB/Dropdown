@@ -9,7 +9,7 @@ import Button from "./Button.js";
  * @export
  * @class Dropdown
  * @extends {Class}
- * @author Juan Cruz Armentia <juancarmentia@gmail.com>
+ * @author Juan Cruz Armentia <juan.cruz.armentia@gmail.com>
  */
 export default class Dropdown extends Class {
     /**
@@ -49,7 +49,15 @@ export default class Dropdown extends Class {
             }, 
         },
     }) {
-        super({ ...Dropdown.props, ...((data && data.hasOwnProperty("props")) ? data.props : {}) }, { ...Dropdown.state, ...((data && data.hasOwnProperty("state")) ? data.state : {}) });
+        super({
+            props: {
+                ...Dropdown.props,
+                ...(data && data.hasOwnProperty("props")) ? data.props : {},
+            }, state: {
+                ...Dropdown.state,
+                ...(data && data.hasOwnProperty("state")) ? data.state : {},
+            },
+        });
         this.setCallbacks({ ...Dropdown.callbacks, ...((data && data.hasOwnProperty("callbacks")) ? data.callbacks : {}) });
         this.setHTML(`${ this.props.id }.dropdown`);
         this.setButton();

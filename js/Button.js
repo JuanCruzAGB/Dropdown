@@ -6,7 +6,7 @@ import Class from "../../JuanCruzAGB/js/Class.js";
  * @export
  * @class Button
  * @extends Class
- * @author Juan Cruz Armentia <juancarmentia@gmail.com>
+ * @author Juan Cruz Armentia <juan.cruz.armentia@gmail.com>
  */
 export default class Button extends Class {
     /**
@@ -26,8 +26,18 @@ export default class Button extends Class {
             active: false,
         }, htmls, Dropdown,
     }) {
-        super({ ...Button.props, ...((data && data.hasOwnProperty("props")) ? data.props : {}) });
-        this.setHTMLs([ ...((data && data.hasOwnProperty("htmls")) ? data.htmls : []) ], data.Dropdown);
+        super({
+            props: {
+                ...Button.props,
+                ...(data && data.hasOwnProperty("props")) ? data.props : {},
+            }, state: {
+                ...Button.state,
+                ...(data && data.hasOwnProperty("state")) ? data.state : {},
+            },
+        });
+        this.setHTMLs([
+            ...(data && data.hasOwnProperty("htmls")) ? data.htmls : [],
+        ], data.Dropdown);
     }
 
     /**
